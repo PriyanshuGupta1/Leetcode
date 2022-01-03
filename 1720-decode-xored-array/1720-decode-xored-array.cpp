@@ -6,7 +6,8 @@ public:
         a.push_back(first);
         for(int i=0;i<encoded.size();i++)
         {
-            a.push_back(encoded[i]^a[i]);
+            first=encoded[i]^a[i];
+            a.push_back(first);
         }
         return a;
     }
