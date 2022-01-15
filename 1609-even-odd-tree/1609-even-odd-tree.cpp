@@ -28,30 +28,17 @@ public:
                 if(level&1)
                 {
                     if(curr->val%2!=0)
-                    {
-                        cout<<"a";
                         return false;  
-                    }
                 }   
                 else
                 {
                     if(curr->val%2==0 )
-                    {
-                        cout<<"b";
                         return false;
-                    }
                 }
                 if(curr->val>=prev && level%2!=0)
-                {
-                    cout<<curr->val<<" "<<prev<<" "<<level;
-                    cout<<"c";
                     return false;
-                }
                 if(curr->val<=prev && level%2==0)
-                {
-                    cout<<curr->val<<" "<<prev;
                     return false;
-                }
                 prev=curr->val;
             }
             if(curr==NULL)
@@ -62,7 +49,6 @@ public:
                 else
                     prev=INT_MIN;
                 q.push(NULL);
-                
             }
             if(curr!=NULL && curr->left!=NULL)
                 q.push(curr->left);
