@@ -17,22 +17,14 @@ public:
             return head;
         while(curr!=NULL && curr->next!=NULL)
         {
-            if(curr==head)
-                head=curr->next;
+            if(curr==head)head=curr->next;
             prev2=curr->next;
             temp=curr->next->next;
             curr->next->next=curr;
-            if(prev1!=NULL)
-                prev1->next=prev2;
+            if(prev1!=NULL)prev1->next=prev2;
             prev1=curr;
             curr->next=temp;
             curr=curr->next;
-        }
-        curr=head;
-        while(curr!=NULL)
-        {
-            cout<<curr->val<<" ";
-            curr=curr->next;            
         }
         return head;
     }
