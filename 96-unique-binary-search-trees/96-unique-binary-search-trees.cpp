@@ -2,11 +2,16 @@ class Solution {
 public:
     int numTrees(int n) 
     {
-        long a=1;
-        for(int i=0;i<n;i++)
+        int g[20]={0};
+        g[0]=1;
+        g[1]=1;
+        for(int i=2;i<=n;i++)
         {
-            a=a*2*(2*i+1)/(i+2);
+            for(int j=1;j<=i;j++)
+            {
+                g[i]+=g[j-1]*g[i-j];
+            }
         }
-        return (int)a;
+        return g[n];
     }
 };
