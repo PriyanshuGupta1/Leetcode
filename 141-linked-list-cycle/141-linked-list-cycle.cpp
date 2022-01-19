@@ -13,7 +13,7 @@ public:
         if(head==NULL)
             return false;
         ListNode *fast=head->next,*slow=head;
-        while(fast!=NULL && slow!=NULL && fast->next!=NULL)
+        while(fast!=NULL && fast->next!=NULL)
         {
             if(fast==slow)
                 return true;
