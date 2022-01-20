@@ -20,7 +20,6 @@ public:
                 max=middle;
             else
                 min=middle+1;
-            cout<<max<<" "<<min<<endl;
         }
         return max;
         
