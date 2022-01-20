@@ -1,17 +1,28 @@
 class Solution {
 public:
-    int minEatingSpeed(vector<int>& piles, int H) {
-        int low = 1, high = 1000000000, k = 0;
-        while (low <= high) {
-            k = (low + high) / 2;
-            int h = 0;
-            for (int i = 0; i < piles.size(); i ++) 
-                h += ceil(1.0 * piles[i] / k);
-            if (h > H)
-                low = k + 1;
-            else
-                high = k - 1;
+    int minEatingSpeed(vector<int>& piles, int H) 
+    {
+        int min=1,max=0;
+        for(int i=0;i<piles.size();i++)
+        {
+            if(piles[i]>max)
+                max=piles[i];
         }
-        return low;
+        cout<<max<<" "<<min;
+        while(max>min)
+        {
+            int middle=(max+min)/2,count=0;
+            for(int i=0;i<piles.size();i++)
+            {
+                count+=(piles[i]/middle)+(piles[i]%middle!=0);
+            }
+            if(count<=H)
+                max=middle;
+            else
+                min=middle+1;
+            cout<<max<<" "<<min<<endl;
+        }
+        return max;
+        
     }
 };
