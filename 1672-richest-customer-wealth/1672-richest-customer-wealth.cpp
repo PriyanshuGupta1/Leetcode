@@ -5,7 +5,7 @@ public:
         int wealth_cust=0,max_wealth_cust=0;
         for(int i=0;i<accounts.size();i++)
         {
-            int wealth_cust=0;
+            wealth_cust=0;
             for(int j=0;j<accounts[i].size();j++)
             {
                 wealth_cust+=accounts[i][j];
