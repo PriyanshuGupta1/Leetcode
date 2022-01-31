@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // Sorting the array than finding it their is a repetion in array
     int findDuplicate(vector<int>& nums) 
     {
         sort(nums.begin(),nums.end());
