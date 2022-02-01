@@ -1,5 +1,5 @@
-//Time Complexity:O(N)
-//Space Complexity: O(N) in worst case
+//Time Complexity:O(M*N)
+//Space Complexity: O(M+N) in worst case
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) 
