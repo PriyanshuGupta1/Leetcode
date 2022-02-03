@@ -1,5 +1,8 @@
 class Solution {
 public:
+    //Approach 2 Using Binary Search
+    //Time complexity: O(log(M*N))
+    //Space Complexity : O(1)
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         int r=matrix.size(),c=matrix[0].size();
         int totalElements=r*c-1;
@@ -25,7 +28,9 @@ public:
     }
              
 };
-//     //Approach 1 in O(M+N) (where N is number of rows whereas M is no of coloumns
+//     //Approach 1 
+//     Time Complexity: O(M+N) (where N is number of rows whereas M is no of coloumns)
+//     Space Complexity : O(1)
 //     bool searchMatrix(vector<vector<int>>& matrix, int target) 
 //     {
 //         int rowToSearch=-1;
