@@ -23,7 +23,10 @@ public:
         {
             targetSum-=root->val;
             if(targetSum==0)
+            {
                 q.push_back(a);
+                return;
+            }
             if(targetSum<0)
                 return;
         }
