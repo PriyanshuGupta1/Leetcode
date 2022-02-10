@@ -24,6 +24,8 @@ public:
                 path=true;
                 return;
             }
+            if(targetSum<0)
+                return;
         }
         if(root->left!=NULL)
             dfs(root->left,targetSum-root->val);
