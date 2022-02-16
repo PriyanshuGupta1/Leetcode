@@ -13,8 +13,7 @@ public:
     ListNode* swapPairs(ListNode* head) 
     {
         ListNode *curr=head,*prev1=NULL,*prev2=NULL,*temp;
-        if(head==NULL)
-            return head;
+        if(head==NULL || head->next==NULL )return head;
         while(curr!=NULL && curr->next!=NULL)
         {
             if(curr==head)head=curr->next;
