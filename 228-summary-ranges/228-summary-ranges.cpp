@@ -4,22 +4,22 @@ public:
     {
         string a;
         vector <string > v;
-        int j=0;
-        for(int i=0;j<nums.size();j++)
+        int i=0;
+        for(int j=0;j<nums.size();j++)
         {
-            if(j+1<nums.size() && nums[j+1]==nums[j]+1)
-                continue;
+            if(j+1<nums.size() && nums[j+1]==nums[j]+1) //nums[j+1]-nums[j]==1 is not taken to avoid overflow 
+                continue; //if consecutive range is present we will continue to process the array
             if(i==j)
             {
-                a=to_string(nums[i]);
+                a=to_string(nums[i]);//only single element is present with no consecutive element ahead
                 v.push_back(a);
                 a.erase();
             }
             else
             {
-                a+=to_string(nums[i]);
+                a+=to_string(nums[i]);//the element where the range started
                 a+="->";
-                a+=to_string(nums[j]);
+                a+=to_string(nums[j]); // the element where the range ended
                 v.push_back(a);
                 a.erase();
             }
