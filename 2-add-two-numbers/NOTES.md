@@ -1,1 +1,1 @@
-​
+Use a dummy head instead of head as we have to write additional conditional statements for it so in the end we willl just return dummy->next instead of head
