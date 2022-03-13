@@ -11,23 +11,12 @@ public:
         {
             if(s[i]=='{'|| s[i]=='(' || s[i]=='[')
                 st.push(s[i]);
-            if(s[i]==')')
+            else
             {
-                if(!st.empty() && st.top()=='(')
-                    st.pop();
-                else
+                if(st.empty())
                     return false;
-            }
-            else if(!st.empty() && s[i]==']')
-            {
-                if(st.top()=='[')
-                    st.pop();
-                else
-                    return false;
-            }
-            else if(!st.empty() && s[i]=='}')
-            {
-                if(st.top()=='{')
+                char a=st.top();
+                if((s[i]==')' && a=='(') || (s[i]==']' && a=='[' ) || (s[i]=='}' && a=='{'))
                     st.pop();
                 else
                     return false;
