@@ -29,13 +29,10 @@ public:
                 a.push_back(last-first+1);
                 last=-1;
             }
+            else if(last>=loccur[s[i]-'a']-1)
+                continue;
             else
-            {
-                if(last>=loccur[s[i]-'a']-1)
-                    continue;
-                else
-                    last=loccur[s[i]-'a']-1;
-            }
+                last=loccur[s[i]-'a']-1;
         }
         return a;
     }
