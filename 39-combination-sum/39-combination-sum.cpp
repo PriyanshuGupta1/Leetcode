@@ -1,24 +1,24 @@
 class Solution {
 public:
-    vector<vector<int>>result;
-    vector<int>current;
-    void function(vector<int>& candidates,int target,int index)
+    vector <vector<int>> a;
+    void subset(int index,vector <int> &candidates,int target,vector <int> t)
     {
+        if(target<0 || index==candidates.size())
+            return;
         if(target==0)
         {
-            result.push_back(current);
+            a.push_back(t);
             return;
         }
-        if(index==candidates.size() || target<0)
-            return;
-        current.push_back(candidates[index]);
-        function(candidates,target-candidates[index],index);
-        current.pop_back();
-        function(candidates,target,index+1);      
+        t.push_back(candidates[index]);
+        subset(index,candidates,target-candidates[index],t);
+        t.pop_back();
+        subset(index+1,candidates,target,t);
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) 
     {
-        function(candidates,target,0);
-        return result;
+        vector <int> t;
+        subset(0,candidates,target,t);
+        return a;    
     }
 };
