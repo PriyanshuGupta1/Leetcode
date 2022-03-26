@@ -1,20 +1,17 @@
 class Solution {
-    public:
-    int climbStairs(int n) 
+public:
+    int calc(int n,vector <int > &dp)
     {
-        vector <long long > dp(n+1,-1);
-        dp[n]=count(n,dp);
-        return dp[n];
-    }
-    int count(long long nStairs,vector<long long> &dp)
-    {
-        if(nStairs<0)
-            return 0;
-        if(!nStairs)
+        if(n==0)
             return 1;
-        if(dp[nStairs]==-1)
-            return dp[nStairs]=(count((nStairs-1),dp)+count((nStairs-2),dp));
-        else 
-            return dp[nStairs];   
+        if(n<0)
+            return 0;
+        if(dp[n]!=-1)
+            return dp[n];
+        return dp[n]=calc(n-1,dp)+calc(n-2,dp);
+    }
+    int climbStairs(int n) {
+        vector <int > dp(n+1,-1);
+        return dp[n]=calc(n-1,dp)+calc(n-2,dp);
     }
 };
