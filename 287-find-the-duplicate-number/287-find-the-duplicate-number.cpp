@@ -1,15 +1,20 @@
 class Solution {
 public:
-    // Sorting the array than finding it their is a repetion in array
     int findDuplicate(vector<int>& nums) 
     {
-        sort(nums.begin(),nums.end());
-        for(int i=0;i<nums.size();i++)
+        int fast=nums[0],slow=nums[0];
+        do
         {
-            if(nums[i]==nums[i+1])
-                return nums[i];
+            fast=nums[nums[fast]];
+            slow=nums[slow];
+        }while(fast!=slow);
+        slow=nums[0];
+        while(slow!=fast)
+        {
+            slow=nums[slow];
+            fast=nums[fast];
         }
-        return 0;
+        return slow;
     }
     // Using Hash map
     // int findDuplicate(vector<int>& nums) 
