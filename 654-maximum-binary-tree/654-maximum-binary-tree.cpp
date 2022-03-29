@@ -15,15 +15,10 @@ public:
     {
         if(left>right)
             return NULL;
-        int max=INT_MIN,index=left;
+        int index=left;
         for(int i=left;i<=right;i++)
-        {
-            if(nums[i]>max)
-            {
-                max=nums[i];
+            if(nums[i]>nums[index])
                 index=i;
-            }
-        }
         TreeNode *curr=new TreeNode(nums[index]);
         curr->left=createTree(nums,left,index-1);
         curr->right=createTree(nums,index+1,right);
