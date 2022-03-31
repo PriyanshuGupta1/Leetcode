@@ -2,19 +2,19 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         vector<int> v;
-        unordered_map<int,int> m;
+        map<int,int> mp;
         for(int i=0;i<nums.size();i++)
         {
-            if(m.find(target-nums[i])!=m.end())
+            if(mp[target-nums[i]]!=0)
             {
-                v.push_back(m[target-nums[i]]);
                 v.push_back(i);
-                return v;
-            }
-            else
-                m[nums[i]]=i;
+                v.push_back(mp[target-nums[i]]-1);
+                break;
+            }   
+            else 
+                mp[nums[i]]=i+1;
         }
-       return v;
+        return v;
     }
 };
     // Approach 1(Brute Force Technique) 
