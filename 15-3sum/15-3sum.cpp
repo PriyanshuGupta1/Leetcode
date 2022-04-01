@@ -15,11 +15,7 @@ public:
                 {
                     if(nums[left]+nums[right]==target)
                     {
-                        vector <int > v;
-                        v.push_back(nums[left]);
-                        v.push_back(nums[right]);
-                        v.push_back(nums[i]);
-                        a.push_back(v);
+                        a.push_back({nums[left],nums[right],nums[i]});
                         left++;right--;
                         while(left<right && nums[left]==nums[left-1])
                             left++;
