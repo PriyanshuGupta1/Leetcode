@@ -3,16 +3,31 @@ public:
     int lastStoneWeight(vector<int>& stones) {
         if(stones.size()==1)
             return stones[0];
-        while(stones.size()>1)
+        int leftMax=0,rightMax=0,currSize=stones.size();
+        while(currSize>1)
         {
-            sort(stones.begin(),stones.end());   
-            int high=stones[stones.size()-1],high2=stones[stones.size()-2];
-            stones.erase(stones.begin()+stones.size()-2,stones.end());
-            if(high!=high2)
-                stones.push_back(high-high2);
+            for(int i=0;i<currSize;i++)
+                if(stones[rightMax]<stones[i])
+                    rightMax=i;
+            swap(stones[rightMax],stones[currSize-1]);
+            for(int i=0;i<currSize-1;i++)
+                if(stones[leftMax]<stones[i])
+                    leftMax=i;
+            swap(stones[leftMax],stones[currSize-2]);
+            if(stones[currSize-1]==stones[currSize-2])
+            {
+                currSize-=2;
+                leftMax=0; rightMax=0;
+            }
+            else
+            {
+                stones[currSize-2]=stones[currSize-1]-stones[currSize-2];
+                currSize--;leftMax=0; rightMax=0;
+            }
         }
-        if(stones.size()==0)
+        if(currSize==0)
             return 0;
-        return stones[0];
+        else
+            return stones[0];
     }
 };
