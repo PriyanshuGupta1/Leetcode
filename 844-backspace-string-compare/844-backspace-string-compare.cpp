@@ -1,26 +1,43 @@
 class Solution {
 public:
-    bool backspaceCompare(string s, string t) 
-    {
-        string a,b;
-        for(int i=0;i<s.length();i++)
+    bool backspaceCompare(string s, string t) {
+        int j=0,k=0;
+        // for 1st string
+        for(int i=0;i<s.size();i++)
         {
-            if(a.length()!=0 && s[i]=='#')
-                a.erase(a.length()-1,a.length());
-            else if(s[i]!='#')
-                a+=s[i];
+           if(s[i]=='#')
+           {
+                j--;
+                j=max(0,j); // j will never be -ve
+           }
+           else
+           {
+               s[j]=s[i];
+               j++;
+           }
         }
-        for(int i=0;i<t.length();i++)
+        // for 2nd string
+        for(int i=0;i<t.size();i++)
         {
-            if(b.length()!=0 && t[i]=='#')
-                b.erase(b.length()-1,b.length());
-            else if(t[i]!='#')
-                b+=t[i];
+           if(t[i]=='#')
+           {
+                k--;
+                k=max(0,k); // k will never be -ve
+           }
+           else
+           {
+               t[k]=t[i];
+               k++;
+           }
         }
-        // cout<<a<<" "<<b;
-        if(!a.compare(b))
+        if(j!=k) return false;
+        else
+        {
+            for(int i=0;i<k;i++)
+            {
+                if(s[i]!=t[i]) return false;
+            }
             return true;
-        else 
-            return false;
+        } 
     }
 };
