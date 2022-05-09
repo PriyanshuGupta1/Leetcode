@@ -1,17 +1,18 @@
 class Solution {
 public:
-    int recursive(vector <int> &nums,int index,vector <int> &dp){
-        if(index==nums.size()-1)
-            return nums[index];
-        if(index>=nums.size())
-            return 0;
-        if(dp[index]!=-1)
-            return dp[index];
-        return dp[index]=max(nums[index]+recursive(nums,index+2,dp),recursive(nums,index+1,dp));
-    }
     int rob(vector<int>& nums) 
     {
-        vector <int> dp(nums.size()-1,-1);
-        return recursive(nums,0,dp);
+        int prev_1=nums[0],prev_2=0;
+        for(int i=1;i<nums.size();i++){
+            int left=nums[i];
+            if(i>1)
+                left+=prev_2;
+            int right=prev_1;
+            int temp=max(left,right);
+            prev_2=prev_1;
+            prev_1=temp;
+        }
+        return prev_1;
     }
+    
 };
