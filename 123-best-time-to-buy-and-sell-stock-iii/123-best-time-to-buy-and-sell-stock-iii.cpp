@@ -1,18 +1,19 @@
 class Solution {
 public:
-    int recursion(int index,int buy,int cap,vector <int> &prices,vector <vector <vector <int>>> &dp)
+    int recursion(int index,int TransactionNo,vector <int> &prices,vector <vector <int>> &dp,int k)
     {
-        if(index==prices.size() || cap==0)
+        if(index==prices.size() || TransactionNo==k)
             return 0;
-        if(dp[index][buy][cap] != -1)
-            return dp[index][buy][cap];
-        if(buy)
-            return dp[index][buy][cap]=max(-prices[index]+recursion(index+1,0,cap,prices,dp),0+recursion(index+1,buy,cap,prices,dp));
+        if(dp[index][TransactionNo] != -1)
+            return dp[index][TransactionNo];
+        if(TransactionNo %2 == 0)
+            return dp[index][TransactionNo]=max(-prices[index]+recursion(index+1,TransactionNo+1,prices,dp,k),0+recursion(index+1,TransactionNo,prices,dp,k));
         else
-            return dp[index][buy][cap]=max(prices[index]+recursion(index+1,1,cap-1,prices,dp),0+recursion(index+1,buy,cap,prices,dp));
+            return dp[index][TransactionNo]=max(prices[index]+recursion(index+1,TransactionNo+1,prices,dp,k),0+recursion(index+1,TransactionNo,prices,dp,k));
     }
     int maxProfit(vector<int>& prices) {
-        vector <vector <vector <int>>> dp(prices.size(),vector <vector <int>>(2,vector <int>(3,-1)));
-        return recursion(0,1,2,prices,dp);
+        vector <vector <int>> dp(prices.size(),vector <int>(2*2,-1));
+        // vector <vector <int >> dp()
+        return recursion(0,0,prices,dp,2*2);
     }
 };
