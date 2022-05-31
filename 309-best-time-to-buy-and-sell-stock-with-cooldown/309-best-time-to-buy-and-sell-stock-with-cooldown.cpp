@@ -12,18 +12,20 @@ public:
             return dp[index][buy]=max(prices[index]+recursion(index+2,1,prices,dp),recursion(index+1,buy,prices,dp));
     }
     int maxProfit(vector<int>& prices) {
-        vector <vector <int>> dp(prices.size()+2,vector <int>(2,0));
+        vector <int> next(2,0),cur(2,0),next2(2,0);
         for(int index=prices.size()-1;index>=0;index--)
         {
             for(int buy=0;buy<2;buy++)
             {
                 if(buy)
-                    dp[index][buy]=max(-prices[index]+dp[index+1][0],dp[index+1][buy]);
+                    cur[buy]=max(-prices[index]+next[0],next[buy]);
                 else
-                    dp[index][buy]=max(prices[index]+dp[index+2][1],dp[index+1][buy]);
+                    cur[buy]=max(prices[index]+next2[1],next[buy]);
             }
+            next2=next;
+            next=cur;
         }
         
-        return dp[0][1];
+        return cur[1];
     }
 };
