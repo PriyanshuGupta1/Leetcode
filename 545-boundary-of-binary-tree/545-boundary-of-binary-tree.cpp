@@ -68,16 +68,8 @@ public:
         if(!isLeaf(root))
             v.push_back(root->val);
         leftBoundary(root,v);
-        for(auto it:v)
-            cout<<it<<" ";
         leafInorder(root,v);
-        for(auto it:v)
-            cout<<it<<" ";
-        
         rightBoundary(root,v);
-        for(auto it:v)
-            cout<<it<<" ";
-        cout<<endl;
         return v;
     }
 };
