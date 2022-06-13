@@ -17,7 +17,7 @@ public:
             return NULL;
         // cout<<startIn<<" "<<endIn<<" "<<startPre<<" "<<endPre<<endl;
         TreeNode *root=new TreeNode(preorder[startPre]);
-        int i=mp[root->val];
+        int i=mp[preorder[startPre]];
         root->left=build(preorder,inorder,startIn,i-1,startPre+1,startPre+i-startIn,mp);
         root->right=build(preorder,inorder,i+1,endIn,startPre+i-startIn+1,endPre,mp);
         return root;
