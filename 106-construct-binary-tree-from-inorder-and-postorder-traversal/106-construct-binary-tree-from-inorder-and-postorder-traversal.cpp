@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    TreeNode *build(vector <int> &inorder,vector <int> &postorder ,int startIn,int endIn,int startPost,int endPost,map <int,int> &mp)
+    TreeNode *build(vector <int> &inorder,vector <int> &postorder ,int startIn,int endIn,int startPost,int endPost,unordered_map <int,int> &mp)
     {
         // cout<<startIn<<" "<<endIn<<" "<<startPost<<" "<<endPost<<endl;
         if(startIn>endIn || startPost>endPost)
@@ -27,7 +27,7 @@ public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         if(inorder.size()==0)
             return NULL;
-        map <int,int > mp;
+        unordered_map <int,int > mp;
         for(int i=0;i<inorder.size();i++)
             mp[inorder[i]]=i;
         return build(inorder,postorder,0,inorder.size()-1,0,postorder.size()-1,mp);
