@@ -3,23 +3,26 @@ public:
     vector<int> productExceptSelf(vector<int>& nums) {
         vector <int> res;
         int prod=1;
-        for(int i=0;i<nums.size();i++)
-            prod*=nums[i];
+        vector <int> left(nums.size(),1),right(nums.size(),1);
         for(int i=0;i<nums.size();i++)
         {
-            if(nums[i]==0)
+            if(i!=0)
             {
-                int curr=1;
-                for(int j=0;j<nums.size();j++)
-                {
-                    if(i!=j)
-                        curr*=nums[j];
-                }
-                res.push_back(curr);
+                prod*=nums[i-1];
+                left[i]=prod;
             }
-            else
-                res.push_back(prod/nums[i]);
         }
+        prod=1;
+        for(int j=nums.size()-1;j>=0;j--)
+        {
+            if(j!=nums.size()-1)
+            {
+                prod*=nums[j+1];
+                right[j]=prod;
+            }
+        }
+        for(int i=0;i<nums.size();i++)
+            res.push_back(left[i]*right[i]);
         return res;
     }
 };
