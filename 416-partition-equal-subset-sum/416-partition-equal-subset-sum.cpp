@@ -8,7 +8,7 @@ public:
             return false;
         if(dp[index][lsum] != -1)
             return dp[index][lsum];
-        return dp[index][lsum]=recursion(index+1,lsum+nums[index],sum,nums,dp) | recursion(index+1,lsum,sum,nums,dp);
+        return dp[index][lsum]=recursion(index-1,lsum+nums[index],sum,nums,dp) | recursion(index-1,lsum,sum,nums,dp);
     }
     
     bool canPartition(vector<int>& nums) {
@@ -19,6 +19,6 @@ public:
         if(sum%2!=0)
             return false;
         vector <vector <int>> dp(nums.size(),vector <int>(sum,-1));
-        return recursion(0,0,sum/2,nums,dp);
+        return recursion(nums.size()-1,0,sum/2,nums,dp);
     }
 };
