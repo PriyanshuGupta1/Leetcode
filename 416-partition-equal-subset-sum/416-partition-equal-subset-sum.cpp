@@ -18,7 +18,7 @@ public:
             sum+=nums[i];
         if(sum%2!=0)
             return false;
-        vector <vector <int>> dp(nums.size()+1,vector <int>(sum+1,-1));
+        vector <vector <int>> dp(nums.size(),vector <int>(sum,-1));
         return recursion(0,0,sum/2,nums,dp);
     }
 };
