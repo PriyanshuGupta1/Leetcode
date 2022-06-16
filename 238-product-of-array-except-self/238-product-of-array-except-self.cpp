@@ -1,15 +1,14 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-        vector <int> res;
+        vector <int> res(nums.size(),1);
         int prod=1;
-        vector <int> left(nums.size(),1),right(nums.size(),1);
         for(int i=0;i<nums.size();i++)
         {
             if(i!=0)
             {
                 prod*=nums[i-1];
-                left[i]=prod;
+                res[i]=prod;
             }
         }
         prod=1;
@@ -18,11 +17,9 @@ public:
             if(j!=nums.size()-1)
             {
                 prod*=nums[j+1];
-                right[j]=prod;
+                res[j]=res[j]*prod;
             }
         }
-        for(int i=0;i<nums.size();i++)
-            res.push_back(left[i]*right[i]);
         return res;
     }
 };
