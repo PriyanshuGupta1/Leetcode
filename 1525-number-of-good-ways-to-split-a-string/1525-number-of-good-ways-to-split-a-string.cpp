@@ -1,7 +1,7 @@
 class Solution {
 public:
     int numSplits(string s) {
-        unordered_map <int,int> lmap,rmap;
+        map <int,int> lmap,rmap;
         for(int i=0;i<s.length();i++)
             rmap[s[i]]++;
         int count=0;
