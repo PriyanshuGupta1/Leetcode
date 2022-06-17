@@ -5,22 +5,17 @@ public:
         for(int i=0;i<s.length();i++)
             rmap[s[i]]++;
         int count=0;
+        int leftDistinct=0,rightDistinct=0;
+        for(auto it=rmap.begin();it!=rmap.end();it++)
+            rightDistinct++;
         for(int i=0;i<s.length();i++)
         {
-            int leftDistinct=0,rightDistinct=0;
+            if(lmap[s[i]]==0)
+                leftDistinct++;
             lmap[s[i]]++;
             rmap[s[i]]--;
-            for(auto it=lmap.begin();it!=lmap.end();it++)
-            {
-                if(it->second != 0)
-                    leftDistinct++;
-            }
-            for(auto it=rmap.begin();it!=rmap.end();it++)
-            {
-                if(it->second != 0)
-                rightDistinct++;
-            }
-            // cout<<leftDistinct<<" "<<rightDistinct<<endl;
+            if(rmap[s[i]]==0)
+                rightDistinct--;
             if(leftDistinct==rightDistinct)
                 count++;
         }
