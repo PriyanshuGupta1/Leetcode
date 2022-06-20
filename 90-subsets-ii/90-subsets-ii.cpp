@@ -1,4 +1,5 @@
 class Solution {
+    // 2*n *n *log n + n *logn 
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         set<vector <int>> set;
@@ -13,7 +14,6 @@ public:
                 if(i&(1<<j))
                     v.push_back(nums[j]);
             }  
-            
             set.insert(v);
         }
         for(auto it:set)
