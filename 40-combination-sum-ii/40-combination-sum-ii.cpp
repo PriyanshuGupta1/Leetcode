@@ -1,7 +1,8 @@
 class Solution {
 public:
     vector <vector <int>> res;
-    void recursion(int index,vector <int> &candidates,int target,vector <int> t)
+    vector <int> t;
+    void recursion(int index,vector <int> &candidates,int target)
     {
         if(target==0)
         {
@@ -15,14 +16,13 @@ public:
             if(candidates[index]>target)
                 break;
             t.push_back(candidates[i]);
-            recursion(i+1,candidates,target-candidates[i],t);
+            recursion(i+1,candidates,target-candidates[i]);
             t.pop_back();
         }
     }
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target)    {
-        vector <int> t;
         sort(candidates.begin(),candidates.end());
-        recursion(0,candidates,target,t);
+        recursion(0,candidates,target);
         return res;
     }
 };
