@@ -1,23 +1,26 @@
 class Solution {
-    // 2*n *n *log n + n *logn 
+private:
+    vector <vector <int>>res;
+    vector <int> v;
 public:
+    void recursion(int index,vector <int> &nums)
+    {
+        if(index>nums.size())
+            return;
+        res.push_back(v);
+        for(int i=index;i<nums.size();i++)
+        {
+            if(i>index && nums[i]==nums[i-1])
+                continue;
+            v.push_back(nums[i]);
+            recursion(i+1,nums);
+            v.pop_back();
+        }
+    }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         set<vector <int>> set;
         sort(nums.begin(),nums.end());
-        vector <vector <int>> res;
-        int n=nums.size();
-        for(int i=0;i<(1<<n);i++)
-        {
-            vector <int> v;
-            for(int j=0;j<n;j++)
-            {
-                if(i&(1<<j))
-                    v.push_back(nums[j]);
-            }  
-            set.insert(v);
-        }
-        for(auto it:set)
-            res.push_back(it);
+        recursion(0,nums);
         return res;
     }
 };
