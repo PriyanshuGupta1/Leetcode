@@ -1,50 +1,10 @@
 class Solution {
 public:
-    bool isSafe(int row,int col,vector <string> board)
-    {
-        int i=row,j=col;
-        
-        while(i>=0 && j>=0)
-        {
-            if(board[i][j]=='Q')
-                return false;
-            i--;
-            j--;
-        }
-        i=row,j=col;
-        
-        while(j>=0)
-        {
-            if(board[i][j]=='Q')
-                return false;
-            j--;
-        }
-        i=row,j=col;
-        
-        while(i<board.size() && j>=0)
-        {
-            if(board[i][j]=='Q')
-                return false;
-            i++;
-            j--;
-        }
-        return true;
-    }
     void recursion(int col,vector <vector <string>> &res,vector <string> board,vector <int> &lRow,vector <int> &diagUp,vector <int> &diagDown)
     {
         if(col==board.size())
         {
             res.push_back(board);
-            // cout<<col<<" "<<board.size();
-            for(int i=0;i<board.size();i++)
-            {
-                for(int j=0;j<board.size();j++)
-                {
-                    cout<<board[i][j]<<" ";
-                }
-                cout<<endl;
-            }
-            cout<<endl;
             return;
         }
         
