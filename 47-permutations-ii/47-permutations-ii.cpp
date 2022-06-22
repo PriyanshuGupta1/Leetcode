@@ -1,23 +1,33 @@
-class Solution {
+class Solution {    
 private:
-    set <vector <int>> st;
-    vector <vector <int>> v;
+    vector <int> v;
 public:
-    void recursion(int index,vector <int> &nums)
+    void recursion(vector <int> &nums,vector <vector <int>>&res,map <int,int> mp)
     {
-        if(index==nums.size())
-            st.insert(nums);
-        for(int i=index;i<=nums.size()-1;i++)
+        if(v.size()==nums.size())
         {
-            swap(nums[index],nums[i]);
-            recursion(index+1,nums);
-            swap(nums[index],nums[i]);
+            res.push_back(v);
+            return;
+        }
+        for(auto it=mp.begin();it!=mp.end();it++)
+        {
+            if(it->second==0)
+                continue;
+            it->second--;
+            v.push_back(it->first);
+            recursion(nums,res,mp);
+            it->second++;
+            v.pop_back();
         }
     }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        recursion(0,nums);
-        for(auto it=st.begin();it!=st.end();it++)
-            v.push_back(*it);
-        return v;
+        // aim select a key each time so that we dont produce same permuation
+        map <int,int> mp;
+        for(int i=0;i<nums.size();i++)
+            mp[nums[i]]++;
+        vector <vector <int>> res;
+        recursion(nums,res,mp);
+        
+        return res;
     }
 };
