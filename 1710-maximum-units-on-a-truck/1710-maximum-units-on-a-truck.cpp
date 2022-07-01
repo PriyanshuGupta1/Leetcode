@@ -1,32 +1,27 @@
 class Solution {
 public:
-    static bool comp(const pair <int,int> &v1,pair <int,int> &v2)
+    static bool comp(const vector <int> &v1,const vector <int> &v2)
     {
-        return v1.second>v2.second;
+        return v1[1]>v2[1];
     }
     int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
         //not a dp quesn 
         //greedy quesn
-        vector <pair <int,int>> v;
-        for(int i=0;i<boxTypes.size();i++)
-        {
-            v.push_back({boxTypes[i][0],boxTypes[i][1]});
-        }
-        sort(v.begin(),v.end(),comp);
+        sort(boxTypes.begin(),boxTypes.end(),comp);
         int maxUnits=0;
-        for(int i=0;i<v.size();i++)
+        for(int i=0;i<boxTypes.size();i++)
         {
             // cout<<maxUnits<<endl;
             if(truckSize==0)
                 return maxUnits;
-            if(truckSize-v[i].first>=0)
+            if(truckSize-boxTypes[i][0]>=0)
             {
-                maxUnits += v[i].first*v[i].second;
-                truckSize -= v[i].first;
+                maxUnits += boxTypes[i][0]*boxTypes[i][1];
+                truckSize -= boxTypes[i][0];
             }
             else
             {
-                maxUnits += truckSize * v[i].second;
+                maxUnits += truckSize * boxTypes[i][1];
                 return maxUnits;
             }
         }
