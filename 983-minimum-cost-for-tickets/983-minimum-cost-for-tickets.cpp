@@ -19,7 +19,7 @@ public:
         return dp[days[i]+1]=min(day1,min(day7,day30));
     }
     int mincostTickets(vector<int>& days, vector<int>& costs) {
-        vector <int> dp(1000,-1);
+        vector <int> dp(367,-1);
         return recursion(0,days,costs,dp);
     }
 };
