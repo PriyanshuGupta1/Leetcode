@@ -18,7 +18,10 @@ class Solution {
             if(!vis[it])
             {
                 vis[it]=1;
-                res |= dfs(it,vis,adj,val);
+                // cout<<val<<" "<<parent<<endl;
+                res = res | dfs(it,vis,adj,val);
+                if(res)
+                    return true;
             }
         }
         return res;
