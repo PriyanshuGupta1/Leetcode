@@ -7,64 +7,30 @@ public:
         // pop the top and find the element with the max stregnth its strength and direction will be final
         // Case 2:not in opposite directions
         // just push it at the top with no worries
-        while(i<asteroids.size())
+        for(int i=0;i<asteroids.size();i++)
         {
-            // cout<<i;
-            if(st.empty())
-                st.push(asteroids[i]);
-            else
+            bool destroyed=false;
+            while(!st.empty() && asteroids[i]<0 && st.top()>0)
             {
-                int strengthTop=st.top(),strengthCurr=abs(asteroids[i]-0),directionTop=-1,directionCurr=-1;
-                strengthTop>0 ? directionTop=1 :directionTop=-1;
-                asteroids[i]>0 ? directionCurr=1 :directionCurr =-1;
-                if(directionTop==directionCurr)
+                if(-asteroids[i]>st.top())
                 {
-                    //they are in same direction no issue
-                    st.push(asteroids[i]);
+                    st.pop();
+                    continue;
+                }
+                else if(-asteroids[i]==st.top())
+                {
+                    st.pop();
+                    destroyed=true;
+                    break;
                 }
                 else
                 {
-                    //they are in opposite direction and should be incoming to each other as well and not away from each other
-                    //there can be many bellow in opp direction as well
-                    if(strengthTop==strengthCurr)
-                            st.pop();
-                    else
-                    {
-                        while(!st.empty())
-                        {    
-                            int strengthTop=st.top(),directionTop=-1;
-                            if(strengthTop>0)
-                                directionTop=1;
-                            if(strengthTop==strengthCurr && directionTop!=directionCurr && directionCurr==-1)
-                            {
-                                st.pop();   
-                                break;
-                            }
-                            else if(strengthTop < strengthCurr && directionTop!=directionCurr && directionCurr==-1)
-                            {
-                                st.pop();   
-                                if(st.empty())
-                                {
-                                    st.push(asteroids[i]);
-                                    break;
-                                }
-                                continue;
-                            }
-                            else if(strengthTop >strengthCurr && directionTop!=directionCurr && directionCurr==-1)
-                            {
-                                //destroyed
-                                break;
-                            }
-                            else 
-                            {
-                                st.push(asteroids[i]);
-                                break;
-                            }
-                        }    
-                    }   
+                    destroyed=true;
+                    break;
                 }
             }
-            i++;
+            if(!destroyed)
+                st.push(asteroids[i]);
         }
         vector <int> res(st.size(),0);
         cout<<st.size();
