@@ -6,12 +6,13 @@ public:
         dfsVis[val]=1;
         for(auto it: adj[val])
         {
-            if(!vis[it])
+            if(vis[it] == 0)
+            {
                 if(!dfs(it,adj,vis,dfsVis,st))
                     return false;
-            if(dfsVis[it])
+            }
+            else if(dfsVis[it] == 1)
                 return false;
-            
         }
         st.push(val);
         dfsVis[val]=0;
