@@ -7,7 +7,6 @@ public:
         map <long long ,long long> mp;
         while(n!=1)
         {
-            cout<<curr<<" ";
             mp[curr]=1;
             if(prev==curr)
                 break;
