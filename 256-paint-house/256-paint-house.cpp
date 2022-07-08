@@ -1,27 +1,20 @@
 class Solution {
 public:
-    int recursion(int index,int prevColour,vector <vector <int>> &costs,vector <vector <int>> &dp)
-    {
-        if(index==costs.size())
-            return 0;
-        if(dp[index][prevColour] != -1)
-            return dp[index][prevColour];
-        int cost=1e9;
-        for(int j=1;j<=costs[0].size();j++)
-        {
-            if(j != prevColour)
-               cost=min(cost,costs[index][j-1]+recursion(index+1,j,costs,dp));
-        }
-        return dp[index][prevColour]=cost;
-    }
-    int minCost(vector<vector<int>>& costs) {
-        // we will start form 0th index
-        // we also need to check what we picked in previous iteration ,that cant be picked in the current iteration
-        // 0 1 2 old indexing
-        // 0 1 2 3 new indexing ,0 represents no color
+    int minCost(vector<vector<int>>& cost) {
         // TimeComplexity: O(N*3*2) = O(N)
         // Space Complexity: O(N*3)= O(N)
-        vector <vector <int>> dp(costs.size()+1,vector <int>(costs[0].size()+2,-1));
-        return recursion(0,0,costs,dp);
+        vector <vector <int>> dp(cost.size()+1,vector <int>(cost[0].size()+2,0));
+        for (int j=0;j<3;j++)
+            dp[0][j]=cost[0][j];
+        for(int i=1;i<cost.size();i++)
+        {
+            dp[i][0]=cost[i][0]+min(dp[i-1][1],dp[i-1][2]);
+            dp[i][1]=cost[i][1]+min(dp[i-1][0],dp[i-1][2]);
+            dp[i][2]=cost[i][2]+min(dp[i-1][0],dp[i-1][1]);
+        }
+        int mini=INT_MAX;
+        for (int j=0;j<3;j++)
+            mini=min(mini,dp[cost.size()-1][j]);
+        return mini;
     }
 };
