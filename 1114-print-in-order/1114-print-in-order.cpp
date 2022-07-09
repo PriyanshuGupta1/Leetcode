@@ -19,11 +19,11 @@ public:
         
         // printSecond() outputs "second". Do not change or remove this line.
         std::unique_lock <std:: mutex> lock(m);
-        while(turn!=1)
-        {
-            cv.wait(lock);
-        }
+        
+            // cout<<turn<<" ";
+        this->cv.wait(lock,[this]{return turn==1;});
         printSecond();
+        lock.unlock();
         turn=2;
         cv.notify_all();
         
@@ -32,9 +32,8 @@ public:
     void third(function<void()> printThird) {
         std::unique_lock <std:: mutex> lock(m);
         // printThird() outputs "third". Do not change or remove this line.
-        while(turn!=2){
-            cv.wait(lock);
-        }
+        this->cv.wait(lock,[this]{return turn==2;});
+        lock.unlock();
         printThird();
     }
 };
