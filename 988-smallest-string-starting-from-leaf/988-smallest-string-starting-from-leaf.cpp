@@ -10,28 +10,25 @@
  * };
  */
 class Solution {
-    set <string> st;
 public:
-    void recursion(TreeNode *root,string t)
+    void recursion(TreeNode *root,string t,string &res)
     {
         if(root==NULL)
-            return;
-        // cout<<root->val;
-        char curr=char(root->val+'a');
-        t=curr+t;
-        // cout<<t<<endl;
+            return ;
+        t=string(1,root->val+'a')+t;
         if(root->left==NULL && root->right==NULL)
-            st.insert(t);
-        recursion(root->left,t);
-        recursion(root->right,t);
+        {
+            if(t<res)
+                res=t;
+        }
+        recursion(root->left,t,res);
+        recursion(root->right,t,res);
     }
     string smallestFromLeaf(TreeNode* root) {
-        string t;
+        string t,res="~";
         if(root==NULL)
-            return t;
-        recursion(root,t);
-        auto it=st.begin();
-        t=*it;
-        return t;
+            return NULL;
+        recursion(root,t,res);
+        return res;
     }
 };
