@@ -10,7 +10,7 @@
  * };
  */
 class Solution {
-    map <int,int> mp;
+    unordered_map <int,int> mp;
 public:
     int inorder(TreeNode *root)
     {
