@@ -18,21 +18,20 @@ public:
             while(turn == 1)
                 cv.wait(lock);
             printFoo();
-            // cv.unlock();
+            lock.unlock();
             turn = 1;
             cv.notify_all();
         }
     }
 
     void bar(function<void()> printBar) {
-        
         for (int i = 0; i < n; i++) {
             std:: unique_lock lock(m);
             while(turn == 0)
                 cv.wait(lock);
         	// printBar() outputs "bar". Do not change or remove this line.
         	printBar();
-            // cv.unlock();
+            lock.unlock();
             turn = 0;
             cv.notify_all();
         }
