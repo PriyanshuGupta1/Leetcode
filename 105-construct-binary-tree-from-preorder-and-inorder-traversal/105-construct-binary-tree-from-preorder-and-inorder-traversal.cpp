@@ -11,23 +11,39 @@
  */
 class Solution {
 public:
-    TreeNode * build(vector <int> &preorder,vector <int> &inorder,int startIn,int endIn,int startPre,int endPre,map <int,int> &mp)
+    TreeNode* recursion(int lIndex,int rIndex,int preS,int preE,vector <int> &preorder,vector <int> &inorder)
     {
-        if(startPre>endPre || startIn>endIn )
+        TreeNode* root=NULL;
+        // cout<<lIndex<<" "<<rIndex<<" "<<preS <<" "<<preE<<endl;
+        if(lIndex>rIndex || preS>preE)
             return NULL;
-        // cout<<startIn<<" "<<endIn<<" "<<startPre<<" "<<endPre<<endl;
-        TreeNode *root=new TreeNode(preorder[startPre]);
-        int i=mp[preorder[startPre]];
-        root->left=build(preorder,inorder,startIn,i-1,startPre+1,startPre+i-startIn,mp);
-        root->right=build(preorder,inorder,i+1,endIn,startPre+i-startIn+1,endPre,mp);
-        return root;
+        for(int i=lIndex;i<=rIndex;i++)
+        {
+            if(inorder[i]==preorder[preS])
+            {
+                root=new TreeNode(preorder[preS]);
+                root->left=recursion(lIndex,i-1,preS+1,preS+i-lIndex,preorder,inorder);
+                root->right=recursion(i+1,rIndex,preS+i-lIndex+1,preE,preorder,inorder);
+                return root;
+            }
+        }
+        return NULL;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        map <int,int> mp;
+        TreeNode *root=NULL;
+        if(inorder.size()==0)
+            return root;
+        int lIndex=0,rIndex=inorder.size(),preIndex=0;
         for(int i=0;i<inorder.size();i++)
         {
-            mp[inorder[i]]=i;
+            if(inorder[i]==preorder[0])
+            {
+                root=new TreeNode(inorder[i]);
+                root->left=recursion(lIndex,i-1,1,i-lIndex,preorder,inorder);
+                root->right=recursion(i+1,rIndex,i-lIndex+1,preorder.size()-1,preorder,inorder);
+                break;
+            }
         }
-        return build(preorder,inorder,0,inorder.size()-1,0,preorder.size()-1,mp);
+        return root;
     }
 };
