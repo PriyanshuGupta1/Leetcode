@@ -1,12 +1,19 @@
 class Solution {
 public:
-    void dfs(int i,vector <int> adj[],vector <int> &vis)
+    void bfs(int i,vector <int> adj[],vector <int> &vis)
     {
-        vis[i]=1;
-        for(auto it: adj[i])
+        queue <int> q;
+        q.push(i);
+        while( !q.empty() )
         {
-            if(vis[it] != 1)
-                dfs(it,adj,vis);
+            int top=q.front();
+            q.pop();
+            vis[top]=1;
+            for(auto it:adj[top] )
+            {
+                if(vis[it] != 1)
+                    q.push(it);
+            }
         }
     }
     int countComponents(int n, vector<vector<int>>& edges) {
@@ -22,7 +29,7 @@ public:
         {
             if(vis[i] != 1)
             {
-                dfs(i,adj,vis);
+                bfs(i,adj,vis);
                 count++;
             }
         }
