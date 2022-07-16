@@ -10,12 +10,8 @@ public:
             q.pop();
             vis[top]=1;
             for( auto it: adj[top] )
-            {
                 if( vis[it] != 1)
-                {
                     q.push(it);
-                }
-            }
         }
     }
     int findCircleNum(vector<vector<int>>& isConnected) {
