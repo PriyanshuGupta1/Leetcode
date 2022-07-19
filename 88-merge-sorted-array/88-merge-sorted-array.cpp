@@ -1,11 +1,14 @@
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        // both are sorted arrays
-        // we will use two pointers to 
-        int j=0;
-        for(int i=m;i<m+n;i++)
-            nums1[i]=nums2[j++];
-        sort(nums1.begin(),nums1.end());
+        int x=m-1,y=n-1;
+        for(int i=m+n-1;i>=0;i--)
+        {
+            if(x<0 || (y>=0 && nums1[x]<nums2[y]))
+                nums1[i]=nums2[y--];
+            else
+                nums1[i]=nums1[x--];
+        }
+
     }
 };
