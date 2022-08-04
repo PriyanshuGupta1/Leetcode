@@ -1,44 +1,26 @@
 class Solution {
 public:
+    // static 
     int minMeetingRooms(vector<vector<int>>& intervals) {
-        // Naive approach
-        // int maxi=0;
-        // for(int i=0;i<intervals.size();i++)
-        //     maxi=max(maxi,intervals[i][1]);
-        // vector <int> room(maxi+2,0);
-        // for(int i=0;i<intervals.size();i++)
-        // {
-        //     room[intervals[i][0]]++;
-        //     room[intervals[i][1]] --;
-        // }
-        // int maxRoom=0,sum=0;
-        // for(int i=0;i<room.size();i++)
-        // {
-        //     sum+=room[i];
-        //     maxRoom=max(sum,maxRoom);
-        // }
-        // return maxRoom;
-        vector <int> arrival;
-        vector <int> dept;
-        for(int i=0;i<intervals.size();i++)
+        sort(intervals.begin(),intervals.end());
+        priority_queue <int,vector <int>,greater <int>> pq;
+        pq.push(intervals[0][1]);
+        int maxSize=1;
+        for(int i=1;i<intervals.size();i++)
         {
-            arrival.push_back(intervals[i][0]);
-            dept.push_back(intervals[i][1]);
-        }
-        sort(arrival.begin(),arrival.end());
-        sort(dept.begin(),dept.end());
-        int i=0,j=0,plat=0,count=0;
-        while( i < intervals.size() )
-        {
-            while( dept[j] <= arrival[i] )
+            auto top=pq.top();
+            if(top <= intervals[i][0])
             {
-                j++;
-                plat--;
+                pq.pop();
+                pq.push(intervals[i][1]);
             }
-            i++;
-            plat++;
-            count=max(count,plat);
+            else
+            {
+                pq.push(intervals[i][1]);
+            }
+            int size=pq.size();
+            maxSize=max(maxSize,size);
         }
-        return count;
+        return maxSize;
     }
 };
