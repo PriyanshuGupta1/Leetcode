@@ -1,47 +1,31 @@
 class Solution {
 public:
-    bool checkParanthesis(string &t)
+    
+    void recursion(int openParanthesis,int closeParanthesis,int n,string &t,vector <string> &res)
     {
-        stack <char> st;
-        for(int i=0;i<t.length();i++)
+        if( openParanthesis == n && closeParanthesis == n )
         {
-            if(t[i] == '(')
-                st.push('(');
-            else
-            {
-                if( !st.empty() && st.top() =='(')
-                    st.pop();
-                else
-                    return false;
-            }
-        }
-        return st.empty();  
-    }
-    void recursion(int openParanthesis,int closeParanthesis,string t,vector <string> &res)
-    {
-        if( closeParanthesis - openParanthesis < 0 || openParanthesis < 0 || closeParanthesis < 0 )
+            res.push_back(t);
             return;
-        if(openParanthesis == 0 && closeParanthesis == 0)
-        {
-            if(checkParanthesis(t))
-            {
-                res.push_back(t);                
-                return;
-            }
-            else
-                return;
         }
-        t+='(';
-        recursion(openParanthesis-1,closeParanthesis,t,res);
-        t.pop_back();
-        t+=')';
-        recursion(openParanthesis,closeParanthesis-1,t,res);
+        if( openParanthesis < n)
+        {
+            t+='(';
+            recursion(openParanthesis+1,closeParanthesis,n,t,res);
+            t.pop_back();
+        }
+        if( openParanthesis > closeParanthesis)
+        {
+            t+=')';
+            recursion(openParanthesis,closeParanthesis+1,n,t,res);
+            t.pop_back();
+        }
     }
     vector<string> generateParenthesis(int n) {
         // Your code goes here 
         vector <string> res;
         string t;
-        recursion(n,n,t,res);
+        recursion(0,0,n,t,res);
         return res;
     }
 };
