@@ -37,15 +37,13 @@ public:
             if(len == k)
             {
                 ListNode * temp=curr->next;
+                ListNode *w=prev->next;
                 curr->next=NULL;
                 ListNode *rev=reverse(prev->next);
                 prev->next=rev;
                 curr=temp;
-                ListNode *trav=dummy;
-                while(trav->next!=NULL)
-                    trav=trav->next;
-                trav->next=temp;
-                prev=trav;
+                w->next=temp;
+                prev=w;
                 len=0;
             }
             else
