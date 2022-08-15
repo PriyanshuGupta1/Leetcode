@@ -10,15 +10,22 @@
  */
 class Solution {
 public:
+    ListNode *front;
+    bool res=true;
+    void recursion(ListNode *curr)
+    {
+        if(curr == NULL)
+            return;
+        recursion(curr->next);
+        if( curr->val != front->val)
+            res=false;
+        front=front->next;
+    }
     bool isPalindrome(ListNode* head) {
-        string num;
-        while(head!=NULL)
-        {
-            num+=head->val;
-            head=head->next;
-        }
-        string t=num;
-        reverse(t.begin(),t.end());
-        return num==t;
+        if(head == NULL)
+            return true;
+        front=head;
+        recursion(head);
+        return res;
     }
 };
