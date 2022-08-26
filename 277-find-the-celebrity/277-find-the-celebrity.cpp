@@ -4,19 +4,20 @@
 class Solution {
 public:
     int findCelebrity(int n) {
+        int possibleCeleb=0;
         for(int i=0;i<n;i++)
         {
-            int j=0;
-            for(;j<n;j++)
-            {
-                if(i==j || !knows(i,j) && knows(j,i))
-                    continue;
-                else if(knows(i,j) || !knows(j,i))
-                    break;
-            }
-            if(j==n)
-                return i;
+            if(knows(possibleCeleb,i) )
+                possibleCeleb=i;
         }
-        return -1;
+        for(int i=0;i<n;i++)
+        {
+            if(possibleCeleb!=i)
+            {
+                if(!knows(i,possibleCeleb) || knows(possibleCeleb,i))
+                    return -1;
+            }
+        }
+        return possibleCeleb;
     }
 };
