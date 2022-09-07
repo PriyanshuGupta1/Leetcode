@@ -10,9 +10,6 @@ public:
         int first=0,last=0,maxLen=0,currPosn=0;
         while(last<word.size())
         {
-            // first can only be starting from a
-            // so if first==last
-            // lets check if it starts with a
             if(first == last)
             {
                 if(word[first] == 'a')
@@ -22,7 +19,6 @@ public:
             }
             else
             {
-                
                 if(word[last]==vec[currPosn])
                     last++;
                 else if(currPosn!=4 && word[last]==vec[currPosn+1])
